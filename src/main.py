@@ -1,9 +1,9 @@
 #!/usr/bin/env python
-from window import MainWindow
+from window import *
 
 def main():
-    app = MainWindow()
-    app.run(None)
+    app = MorseApp()
+    app.run()
 
 
 if __name__ == "__main__":
