@@ -1,7 +1,9 @@
 import gi
 gi.require_version("Gtk", "4.0")
-from gi.repository import Gtk
-from data import *
+from gi.repository import Gtk, GLib
+from data import english_to_morse, morse_to_english
+from sound import play_dit
+import pygame
 
 class Window(Gtk.ApplicationWindow):
     def __init__(self, app):
@@ -11,6 +13,7 @@ class Window(Gtk.ApplicationWindow):
 
         play = Gtk.Button.new_with_label("Play")
         stop = Gtk.Button.new_with_label("Stop")
+        clear = Gtk.Button.new_with_label("Clear")
 
         input = Gtk.TextView()
         input_buffer = input.get_buffer()
@@ -71,6 +74,7 @@ class Window(Gtk.ApplicationWindow):
         mid_box.append(output_frame)
         bot_box.append(play)
         bot_box.append(stop)
+        bot_box.append(clear)
                 
         main_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=10)
         main_box.set_halign(Gtk.Align.CENTER)
@@ -81,10 +85,12 @@ class Window(Gtk.ApplicationWindow):
         main_box.append(top_box)
         main_box.append(mid_box)
         main_box.append(bot_box)
-
+        
+        clear.connect('clicked', self.clear_buffer,input_buffer,output_buffer)
         input_buffer.connect('changed', self.english_to_morse_trans,output_buffer)
         self.set_child(main_box)
-    
+        play.connect('clicked', self.play_morse, output_buffer)
+
     def english_to_morse_trans(self, input_buffer, output_buffer):
         if input_buffer:
             input_start = input_buffer.get_start_iter()
@@ -92,9 +98,43 @@ class Window(Gtk.ApplicationWindow):
             input_text = input_buffer.get_text(input_start, input_end, True)
             translated = []
             for char in input_text:
-                translated.append(english_to_morse[char])
-                output_buffer.set_text(' '.join(translated))
+                if char in english_to_morse:
+                    translated.append(english_to_morse[char])
+                    output_buffer.set_text(' '.join(translated))
+                elif not char:
+                    output_buffer.set_text("")
+    def clear_buffer(self, button, input_buffer, output_buffer):
+        output_buffer.set_text("")
+        input_buffer.set_text("")
+    
+    def play_next(self, index, text):
+        dit = 0.15
+        dah = 0.45
+        while index < len(text):
+            for char in text[index]:
+                if char == '.':
+                    play_dit(dit)
+                    index += 1
+                    GLib.timeout_add((dit*1000)+50, self.play_next, index, text)
+                    return False
+                elif char == '-':
+                    play_dit(dah)
+                    index += 1
+                    GLib.timeout_add((dah*1000)+50, self.play_next, index, text)
+                    return False
+                else:
+                    index += 1
+                    GLib.timeout_add(500, self.play_next, index, text)
+                    return False
+        return False
 
+    def play_morse(self,button,output_buffer):
+        index = 0
+        start = output_buffer.get_start_iter()
+        end = output_buffer.get_end_iter()
+        text = output_buffer.get_text(start, end, True)
+        if index < len(text):
+            self.play_next(index, text)
 
 class MorseApp(Gtk.Application):
     def __init__(self):
