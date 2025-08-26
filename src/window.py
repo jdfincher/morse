@@ -1,6 +1,7 @@
 import gi
 gi.require_version("Gtk", "4.0")
 from gi.repository import Gtk
+from data import *
 
 class Window(Gtk.ApplicationWindow):
     def __init__(self, app):
@@ -13,12 +14,13 @@ class Window(Gtk.ApplicationWindow):
 
         input = Gtk.TextView()
         input_buffer = input.get_buffer()
+
         input.set_left_margin(10)
         input.set_right_margin(10)
         input.set_wrap_mode(wrap_mode=Gtk.WrapMode.WORD)
         input.set_pixels_above_lines(10)
         input.set_pixels_below_lines(10)
-        input.set_justification(Gtk.Justification.FILL)
+        input.set_justification(Gtk.Justification.CENTER)
 
         input_scroll = Gtk.ScrolledWindow()
         input_scroll.set_child(input)
@@ -43,6 +45,7 @@ class Window(Gtk.ApplicationWindow):
         output.set_wrap_mode(wrap_mode=Gtk.WrapMode.WORD)
         output.set_editable(False)
         output.set_cursor_visible(False)
+        output.set_justification(Gtk.Justification.CENTER)
 
         output_scroll = Gtk.ScrolledWindow()
         output_scroll.set_child(output)
@@ -79,8 +82,18 @@ class Window(Gtk.ApplicationWindow):
         main_box.append(mid_box)
         main_box.append(bot_box)
 
+        input_buffer.connect('changed', self.english_to_morse_trans,output_buffer)
         self.set_child(main_box)
-
+    
+    def english_to_morse_trans(self, input_buffer, output_buffer):
+        if input_buffer:
+            input_start = input_buffer.get_start_iter()
+            input_end = input_buffer.get_end_iter()
+            input_text = input_buffer.get_text(input_start, input_end, True)
+            translated = []
+            for char in input_text:
+                translated.append(english_to_morse[char])
+                output_buffer.set_text(' '.join(translated))
 
 
 class MorseApp(Gtk.Application):
