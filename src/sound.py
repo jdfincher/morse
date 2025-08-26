@@ -1,7 +1,7 @@
 import pygame
 import numpy as np
 
-def play_dit(duration=0.25):
+def play_sound(duration=0.25):
     pygame.mixer.init(frequency=44100, size=-16, channels=1)
 
     sample_rate = 44100
@@ -14,6 +14,8 @@ def play_dit(duration=0.25):
 
     sound = pygame.sndarray.make_sound(wave)
     sound.play()
+
+
     
 
     
