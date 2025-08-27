@@ -11,11 +11,18 @@ class Window(Gtk.ApplicationWindow):
     def __init__(self, app):
         super().__init__(application=app)
         self.set_title("Morse Generator")
-        self.set_default_size(600,400)
+        self.set_default_size(400,500)
+        self.set_resizable(False)
+        
+        logo = Gtk.Picture.new_for_filename("image/logo.png")
+        logo.set_vexpand(True)
+        logo.set_content_fit(Gtk.ContentFit.CONTAIN)
+        logo.set_margin_bottom(5)
+        logo.set_name("logo")
 
-        play = Gtk.Button.new_with_label("Play")
-        stop = Gtk.Button.new_with_label("Stop")
-        clear = Gtk.Button.new_with_label("Clear")
+        play = Gtk.Button.new_with_label("PLAY")
+        stop = Gtk.Button.new_with_label("STOP")
+        clear = Gtk.Button.new_with_label("CLEAR")
 
         input = Gtk.TextView()
         input.set_name("input")
@@ -86,6 +93,7 @@ class Window(Gtk.ApplicationWindow):
         main_box.set_margin_bottom(20)
         main_box.set_margin_start(20)
         main_box.set_margin_end(20)
+        main_box.append(logo)
         main_box.append(top_box)
         main_box.append(mid_box)
         main_box.append(bot_box)

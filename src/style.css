@@ -1,18 +1,42 @@
 #input{
   font-size: 16pt;
-  font-family: "Source Code Pro";
 }
 
 #output {
   font-size: 18pt;
   letter-spacing: 1pt;
   font-family: "Courier";
+  font-weight: 600;
 }
 
 label{
   font-family: "Source Code Pro";
+  color: green;
+  font-weight: 700;
 }
 
+window {
+  background-color: #0F0F0F;
+}
+
+frame {
+  border-color: green;
+  border-width: 3px;
+}
+
+textview {
+  color: white;
+}
+
+button {
+  color: green;
+  background-image: none;
+  background-color: black;
+}
+
+button:hover {
+  background-color: #0F0F0F;
+}
 
 
 
