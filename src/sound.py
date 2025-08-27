@@ -5,7 +5,7 @@ def play_sound(duration=0.25):
     pygame.mixer.init(frequency=44100, size=-16, channels=1)
 
     sample_rate = 44100
-    frequency = 440.0
+    frequency = 600.00
 
     time = np.linspace(0, duration, int(sample_rate * duration), endpoint=False)
 

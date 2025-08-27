@@ -1,6 +1,6 @@
 import gi
 gi.require_version("Gtk", "4.0")
-from gi.repository import Gtk, GLib
+from gi.repository import Gtk, Gdk, GLib
 from data import english_to_morse, morse_to_english
 from sound import play_sound
 import pygame
@@ -18,6 +18,7 @@ class Window(Gtk.ApplicationWindow):
         clear = Gtk.Button.new_with_label("Clear")
 
         input = Gtk.TextView()
+        input.set_name("input")
         input_buffer = input.get_buffer()
 
         input.set_left_margin(10)
@@ -42,6 +43,7 @@ class Window(Gtk.ApplicationWindow):
         input_frame.set_child(input_scroll)
 
         output = Gtk.TextView()
+        output.set_name("output")
         output_buffer = output.get_buffer()
         output.set_left_margin(10)
         output.set_right_margin(10)
@@ -93,12 +95,20 @@ class Window(Gtk.ApplicationWindow):
         self.set_child(main_box)
         play.connect('clicked', self.play_morse, output_buffer)
         stop.connect('clicked', self.stop_morse)
+        
+        
+        css = Gtk.CssProvider()
+        css.load_from_path('src/style.css')
+        Gtk.StyleContext.add_provider_for_display(Gdk.Display.get_default(),
+                                                  css,
+                                                  Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION
+                                                  )
 
     def english_to_morse_trans(self, input_buffer, output_buffer):
         if input_buffer:
             input_start = input_buffer.get_start_iter()
             input_end = input_buffer.get_end_iter()
-            input_text = input_buffer.get_text(input_start, input_end, True)
+            input_text = input_buffer.get_text(input_start, input_end, True).lower()
             translated = []
             for char in input_text:
                 if char in english_to_morse:
@@ -118,7 +128,7 @@ class Window(Gtk.ApplicationWindow):
         global flag
         while index < len(text) and not flag == False:
             for char in text[index]:
-                if char == '.':
+                if char == chr(183):
                     play_sound(dit)
                     index += 1
                     GLib.timeout_add((dit*1000)+50, self.play_next, index, text)
@@ -130,7 +140,7 @@ class Window(Gtk.ApplicationWindow):
                     return False
                 else:
                     index += 1
-                    GLib.timeout_add(500, self.play_next, index, text)
+                    GLib.timeout_add(dit*1000, self.play_next, index, text)
                     return False
         return False
 
@@ -150,7 +160,9 @@ class Window(Gtk.ApplicationWindow):
             flag = False
             pygame.mixer.stop()
 
-            print("SOMETHING SOMETHING")
+
+
+
 
 class MorseApp(Gtk.Application):
     def __init__(self):
