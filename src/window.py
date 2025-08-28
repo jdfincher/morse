@@ -118,12 +118,15 @@ class Window(Gtk.ApplicationWindow):
             input_end = input_buffer.get_end_iter()
             input_text = input_buffer.get_text(input_start, input_end, True).lower()
             translated = []
+            if len(input_text) <= 0:
+                output_buffer.set_text(" ")
             for char in input_text:
                 if char in english_to_morse:
                     translated.append(english_to_morse[char])
                     output_buffer.set_text(' '.join(translated))
                 elif not char:
                     output_buffer.set_text("")
+            
     
     def clear_buffer(self, button, input_buffer, output_buffer):
         output_buffer.set_text("")
