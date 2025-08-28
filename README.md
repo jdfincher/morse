@@ -1,6 +1,6 @@
 # MRSGEN
 ---
-A simple morse code generator for translating from english to morse. Uses pygame to generate tones from an array representing a sine wave and PyGObject Gtk 4 bindings for the ui. A simple python dictionary is used for the translation from the input text buffer to the output text buffer.  
+A simple Morse Code generator for translating from English to Morse. Uses pygame to generate tones from an array representing a sine wave and PyGObject Gtk 4 bindings for the ui. A simple python dictionary is used for the translation from the input text buffer to the output text buffer.  
 
 The Following install guide assumes you are running linux (either arch or a debian/ubuntu distro) and have python installed already. If you are running another linux distro it will likely work just by substituting in your package manager and modifying commands but do so at your own peril.    
 
@@ -47,7 +47,7 @@ cd mrsgen
 ```
 
 ### Initialize uv venv
-This will create the virtual environment in your current directory
+This will create the virtual environment in the mrsgen directory
 ```bash
 uv venv
 ```
