@@ -15,8 +15,6 @@ To install uv
 ```
 curl -LsSf https://astral.sh/uv/install.sh | sh
 ```
-```
-```
 
 Verify installation
 
@@ -38,21 +36,28 @@ git clone https://github.com/jdfincher/mrsgen
 
 Move to mrsgen root directory
 
-` cd mrsgen`
+```
+cd mrsgen
+```
 
 Initialize uv version
 
-`uv venv`
+```
+uv venv
+```
 
 Activate venv
 
-`source .venv/bin/activate`
+```
+source .venv/bin/activate
+```
 
-Include your already installed system packages in the venv by navigating to the .venv directory and edit the pyvenv.cfg.
+Include your already installed system packages in the venv by navigating to the .venv directory and edit the pyvenv.cfg file
 
-`cd .venv`
-
-`nvim pyvenv.cfg`
+```
+cd .venv
+nvim pyvenv.cfg
+```
 
 `include-system-site-packages = true`
 
@@ -60,16 +65,19 @@ Check if GTK4 instropection packages are installed
 
 Arch 
 
-`pacman -Qs '^gtk4$|^gobject-introspection$|^python(-|)gobject' >/dev/null \
+```
+pacman -Qs '^gtk4$|^gobject-introspection$|^python(-|)gobject' >/dev/null \
 && echo "GTK4 introspection packages are installed." \
 || echo "GTK4 introspection packages are NOT installed."
-`
+```
+
 Debian/Ubuntu
 
-`dpkg -s libgtk-4-dev gir1.2-gtk-4.0 python3-gi python3-gi-cairo >/dev/null 2>&1 \
+```
+dpkg -s libgtk-4-dev gir1.2-gtk-4.0 python3-gi python3-gi-cairo >/dev/null 2>&1 \
 && echo "GTK4 introspection packages are installed." \
 || echo "GTK4 introspection packages are NOT installed."
-`
+```
 
 
 Sync dependencies (pygame,numpy,pycairo,pygobject)
