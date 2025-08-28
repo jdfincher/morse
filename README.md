@@ -11,15 +11,22 @@ Uses pygame to generate tones and PyGObject Gtk 4 bindings for the ui.
 
 ## Install with UV
 To install uv
+
 `
 curl -LsSf https://astral.sh/uv/install.sh | sh
 `
+
+Verify installation
+
 `
 uv self version
 `
+
+Clone the repo
+
 `
 git clone https://github.com/jdfincher/mrsgen
 `
-``
+
 
 
