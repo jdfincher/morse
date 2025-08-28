@@ -1,12 +1,10 @@
 # MRSGEN
----
 A simple Morse Code generator for translating from English to Morse. Uses pygame to generate tones from an array representing a sine wave and PyGObject Gtk 4 bindings for the ui. A simple python dictionary is used for the translation from the input text buffer to the output text buffer.  
 
 The Following install guide assumes you are running linux (either arch or a debian/ubuntu distro) and have python installed already. If you are running another linux distro it will likely work just by substituting in your package manager and modifying commands but do so at your own peril.    
 
 ![MRSGEN](image/mrsgen.png)
 
----
 # Dependencies
 *Versions are based on my setup, your mileage may vary*
 - python 3.13+ 
@@ -15,7 +13,7 @@ The Following install guide assumes you are running linux (either arch or a debi
 - numpy 2.3.2+
 - pycairo 1.28+ --> Not directly used but included to be safe. 
 - Gtk 4 introspection packages 
----
+
 # Install with uv
 ### Install uv
 If not already installed use the following to install uv for python so you can keep the dependencies from polluting your system. 
