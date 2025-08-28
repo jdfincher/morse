@@ -14,49 +14,49 @@ Uses pygame to generate tones and PyGObject Gtk 4 bindings for the ui.
 # Install with uv
 Install uv if needed
 
-```
+``` bash #
 curl -LsSf https://astral.sh/uv/install.sh | sh
 ```
 
 Verify installation
 
-```
+``` bash #
 uv self version
 ```
 
 Move to directory you want to download to
 
-```
+``` bash #
 cd path/to/directory
 ```
 
 Clone the repo
 
-```
+``` bash #
 git clone https://github.com/jdfincher/mrsgen
 ```
 
 Move to mrsgen root directory
 
-```
+``` bash #
 cd mrsgen
 ```
 
 Initialize uv version
 
-```
+``` bash #
 uv venv
 ```
 
 Activate venv
 
-```
+``` bash #
 source .venv/bin/activate
 ```
 
 Include your already installed system packages in the venv by navigating to the .venv directory and edit the pyvenv.cfg file
 
-```
+``` bash #
 cd .venv
 nvim pyvenv.cfg
 ```
@@ -69,7 +69,7 @@ Check if GTK4 instropection packages are installed
 
 ### Arch 
 
-``` bash#
+``` bash #
 pacman -Qs '^gtk4$|^gobject-introspection$|^python(-|)gobject' >/dev/null \
 && echo "GTK4 introspection packages are installed." \
 || echo "GTK4 introspection packages are NOT installed."
@@ -77,7 +77,7 @@ pacman -Qs '^gtk4$|^gobject-introspection$|^python(-|)gobject' >/dev/null \
 
 ### Debian/Ubuntu
 
-``` bash#
+``` bash #
 dpkg -s libgtk-4-dev gir1.2-gtk-4.0 python3-gi python3-gi-cairo >/dev/null 2>&1 \
 && echo "GTK4 introspection packages are installed." \
 || echo "GTK4 introspection packages are NOT installed."
@@ -85,26 +85,28 @@ dpkg -s libgtk-4-dev gir1.2-gtk-4.0 python3-gi python3-gi-cairo >/dev/null 2>&1 
 
 Install and update if needed
 
-``` bash#
+### Arch
+
+``` bash #
 sudo pacman -Syu --needed gtk4 gobject-introspection python-gobject
 ```
 
 ### Debian/Ubuntu
 
-``` bash#
+``` bash #
 sudo apt update
 sudo apt install -y libgtk-4-dev gir1.2-gtk-4.0 python3-gi python3-gi-cairo
 ```
 
 Sync dependencies (pygame,numpy,pycairo,pygobject)
 
-```
+``` bash #
 uv sync
 ```
 
 Run with
 
-```
+``` bash #
 ./main.sh
 ```
 
