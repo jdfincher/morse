@@ -72,7 +72,7 @@ to the following and save/close the file.
 include-system-site-packages = true
 ```
 ### Check sys packages
-Now you need to verify the needed gtk4 introspection packages are present. It is important to do this before syncing the python dependencies to ensure a proper build of the venv. In another terminal window run the following command for your distro. 
+Now you need to verify the gtk4 introspection packages are present. It is important to do this before syncing the python dependencies to ensure a proper build of the venv. In another terminal window run the following command for your distro. 
 #### Arch 
 ```bash
 pacman -Qs '^gtk4$|^gobject-introspection$|^python(-|)gobject' >/dev/null \
@@ -109,12 +109,12 @@ Run the application with the following from mrsgen directory inside the venv.
 ./main.sh
 ```
 
-To rerun the app after you have closed the venv you will need to reactivate the venv by running the following command inside the mrsgen directory and then the above command. 
+To rerun the app after you have closed the venv you will need to reactivate the venv by running the following command inside the mrsgen directory and then run the above command. 
 ```bash
 source .venv/bin/activate
 ```
 
-If you get a permission error when running the `./main.sh` command simple run the below to change the files permissions. 
+If you get a permission error when running the `./main.sh` command simply run the below to change the files permissions. 
 ```bash
 chmod 751 main.sh
 ```
