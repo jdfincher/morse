@@ -3,14 +3,16 @@
 A simple morse code generator for translating from english to morse.
 Uses pygame to generate tones and PyGObject Gtk 4 bindings for the ui. 
 
-## Dependencies
+![MRSGEN](image/mrsgen.png)
+
+# Dependencies
 - python3
 - PyGObject
 - pygame
 - Gtk 4 
 
-## Install with uv
-To install uv
+# Install with uv
+Install uv if needed
 
 ```
 curl -LsSf https://astral.sh/uv/install.sh | sh
@@ -59,11 +61,13 @@ cd .venv
 nvim pyvenv.cfg
 ```
 
+Change this line to true
+
 `include-system-site-packages = true`
 
 Check if GTK4 instropection packages are installed
 
-Arch 
+### Arch 
 
 ```
 pacman -Qs '^gtk4$|^gobject-introspection$|^python(-|)gobject' >/dev/null \
@@ -71,7 +75,7 @@ pacman -Qs '^gtk4$|^gobject-introspection$|^python(-|)gobject' >/dev/null \
 || echo "GTK4 introspection packages are NOT installed."
 ```
 
-Debian/Ubuntu
+### Debian/Ubuntu
 
 ```
 dpkg -s libgtk-4-dev gir1.2-gtk-4.0 python3-gi python3-gi-cairo >/dev/null 2>&1 \
@@ -82,7 +86,10 @@ dpkg -s libgtk-4-dev gir1.2-gtk-4.0 python3-gi python3-gi-cairo >/dev/null 2>&1 
 
 Sync dependencies (pygame,numpy,pycairo,pygobject)
 
-`uv sync`
+```
+uv sync
+```
+
 
 
 
